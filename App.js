@@ -1,12 +1,20 @@
-import React from 'react';
-import { View, StyleSheet, SafeAreaView } from 'react-native';
-import { Button, Text } from 'native-base';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { NativeBaseProvider, Container } from 'native-base';
+import Login from './src/screens/Login';
+import Chat from './src/screens/Chat';
+
 export default function App() {
+  const [userName, setUserName] = useState(null);
   return (
-    <SafeAreaView>
-      <Button>
-        <Text>App</Text>
-      </Button>
-    </SafeAreaView>
+    <NativeBaseProvider>
+      <View style={styles.containter}>{!userName ? <Login /> : <Chat />}</View>
+    </NativeBaseProvider>
   );
 }
+const styles = StyleSheet.create({
+  containter: {
+    backgroundColor: '#16202b',
+    flex: 1,
+  },
+});
