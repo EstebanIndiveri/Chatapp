@@ -8,7 +8,9 @@ export default function App() {
   const [userName, setUserName] = useState(null);
   return (
     <NativeBaseProvider>
-      <View style={styles.containter}>{!userName ? <Login /> : <Chat />}</View>
+      <View style={styles.containter}>
+        {!userName ? <Login setUserName={setUserName} /> : <Chat />}
+      </View>
     </NativeBaseProvider>
   );
 }

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, StatusBar, Image, SafeAreaView } from 'react-native';
 import { Item, Input, Text, Button } from 'native-base';
 import logoApp from '../assets/chatLogo.png';
 
-export default function Login() {
+export default function Login({ setUserName }) {
+  const [name, setName] = useState('');
+  const onSubmit = () => {
+    setUserName(name);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -15,9 +19,11 @@ export default function Login() {
           placeholder="Nombre de usuario"
           style={{ color: '#FFF' }}
           placeholderTextColor="grey"
+          value={name}
+          onChange={e => setName(e.nativeEvent.text)}
         />
       </View>
-      <Button style={styles.btnLogin}>
+      <Button style={styles.btnLogin} onPress={onSubmit}>
         <Text style={{ color: '#FFF' }}>Entrar</Text>
       </Button>
     </SafeAreaView>
