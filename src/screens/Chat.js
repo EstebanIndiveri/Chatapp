@@ -4,14 +4,12 @@ import Input from '../components/Input';
 
 export default function Chat() {
   return (
-    <>
-      <View style={styles.content}>
-        <View>
-          <Text>CHAT</Text>
-        </View>
-        <Input />
+    <View style={styles.content}>
+      <View>
+        <Text>CHAT</Text>
       </View>
-    </>
+      <Input />
+    </View>
   );
 }
 

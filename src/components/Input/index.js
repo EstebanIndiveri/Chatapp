@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Platform,
-  StyleSheet,
-} from 'react-native';
-import { Input as InputNB, Icon } from 'native-base';
+import { Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import { Input as InputNB, View, CheckIcon } from 'native-base';
 
 export default function index() {
   return (
@@ -17,8 +11,8 @@ export default function index() {
           style={styles.input}
           placeholderTextColor="gray"
         />
-        <TouchableOpacity>
-          <Icon name="send" style={styles.iconSend} />
+        <TouchableOpacity style={styles.checkContainer}>
+          <CheckIcon color={styles.input.color} />
         </TouchableOpacity>
       </View>
     </View>
@@ -33,11 +27,18 @@ const styles = StyleSheet.create({
   },
   item: {
     borderColor: '#16202b',
+    flexDirection: 'row',
+    width: '100%',
   },
   input: {
     color: '#FFF',
+    width: '90%',
   },
-  iconSend: {
-    color: '#FFF',
+  checkContainer: {
+    width: '12%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    alignSelf: 'center',
+    marginHorizontal: 5,
   },
 });
