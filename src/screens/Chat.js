@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import moment from 'moment';
 import {
@@ -19,13 +19,17 @@ import 'firebase/database';
 export default function Chat(props) {
   const { userName } = props;
   const [messages, setMessages] = useState([]);
-
+  const chatScrollRef = useRef(0);
   useEffect(() => {
     const chat = firebase.database().ref('general');
     chat.on('value', snapshot => {
       setMessages(snapshot.val());
     });
   }, []);
+
+  useEffect(() => {
+    chatScrollRef.current.scrollTo({ y: 10000000 });
+  }, [messages]);
 
   const sendMessage = message => {
     moment.locale('es');
@@ -53,7 +57,7 @@ export default function Chat(props) {
         </HStack>
       </HStack>
       <View style={styles.content}>
-        <ScrollView style={styles.chatView}>
+        <ScrollView style={styles.chatView} ref={chatScrollRef}>
           {map(messages, (message, index) => (
             <Message key={index} message={message} name={userName} />
           ))}

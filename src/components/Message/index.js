@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'native-base';
+import letterColors from '../../utils/letterColors';
 
 export default function Message({ message: { userName, text, time }, name }) {
   const thisIsMe = name === userName;
-
+  const [bgColorLetter, setBgColorLetter] = useState(null);
   const conditionalStyle = {
     container: {
       justifyContent: thisIsMe ? 'flex-end' : 'flex-start',
@@ -18,10 +19,20 @@ export default function Message({ message: { userName, text, time }, name }) {
     },
   };
 
+  useEffect(() => {
+    const char = userName.trim()[0].toUpperCase();
+    const indexLetter = char.charCodeAt() - 65;
+    setBgColorLetter(letterColors[indexLetter]);
+  }, [userName]);
+
   return (
     <View style={[styles.container, conditionalStyle.container]}>
       {!thisIsMe && (
-        <View style={styles.letterView}>
+        <View
+          style={[
+            styles.letterView,
+            { backgroundColor: `rgb(${bgColorLetter})` },
+          ]}>
           <Text styles={styles.letter} color="white">
             {userName.substr(0, 1).toUpperCase()}
           </Text>
@@ -71,6 +82,7 @@ const styles = StyleSheet.create({
     height: 35,
     width: 35,
     borderRadius: 50,
+    overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
