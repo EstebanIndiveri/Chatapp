@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   TextInput,
+  Keyboard,
 } from 'react-native';
 import { View, CheckIcon } from 'native-base';
 
@@ -16,6 +17,7 @@ export default function index(props) {
     if (message.length > 0) {
       sendMessage(message);
       setMessage('');
+      Keyboard.dismiss();
     }
   };
 
