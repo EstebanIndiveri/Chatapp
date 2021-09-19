@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
-import { Input as InputNB, View, CheckIcon } from 'native-base';
+import {
+  Text,
+  TouchableOpacity,
+  Platform,
+  StyleSheet,
+  TextInput,
+} from 'react-native';
+import { View, CheckIcon } from 'native-base';
 
-export default function index() {
+export default function index(props) {
+  const { sendMessage } = props;
+  const [message, setMessage] = useState('');
+
+  const onSubmit = () => {
+    if (message.length > 0) {
+      sendMessage(message);
+      setMessage('');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.item}>
-        <InputNB
+        <TextInput
           placeholder="Mensaje ... "
           style={styles.input}
           placeholderTextColor="gray"
+          value={message}
+          onChange={e => setMessage(e.nativeEvent.text)}
         />
-        <TouchableOpacity style={styles.checkContainer}>
+        <TouchableOpacity style={styles.checkContainer} onPress={onSubmit}>
           <CheckIcon color={styles.input.color} />
         </TouchableOpacity>
       </View>
@@ -29,10 +47,13 @@ const styles = StyleSheet.create({
     borderColor: '#16202b',
     flexDirection: 'row',
     width: '100%',
+    paddingBottom: 20,
   },
   input: {
     color: '#FFF',
     width: '90%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#323232',
   },
   checkContainer: {
     width: '12%',

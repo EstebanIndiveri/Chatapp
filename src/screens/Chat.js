@@ -3,12 +3,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import Input from '../components/Input';
 
 export default function Chat() {
+  const sendMessage = message => {
+    console.log(message);
+  };
+
   return (
     <View style={styles.content}>
       <View>
         <Text>CHAT</Text>
       </View>
-      <Input />
+      <Input sendMessage={sendMessage} />
     </View>
   );
 }
