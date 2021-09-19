@@ -7,7 +7,7 @@ import {
   TextInput,
   Keyboard,
 } from 'react-native';
-import { View, CheckIcon } from 'native-base';
+import { View, CheckCircleIcon } from 'native-base';
 
 export default function index(props) {
   const { sendMessage } = props;
@@ -29,10 +29,12 @@ export default function index(props) {
           style={styles.input}
           placeholderTextColor="gray"
           value={message}
+          multiline={true}
+          maxLength={150}
           onChange={e => setMessage(e.nativeEvent.text)}
         />
         <TouchableOpacity style={styles.checkContainer} onPress={onSubmit}>
-          <CheckIcon color={styles.input.color} />
+          <CheckCircleIcon color={styles.input.color} />
         </TouchableOpacity>
       </View>
     </View>

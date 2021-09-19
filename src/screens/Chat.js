@@ -55,7 +55,7 @@ export default function Chat(props) {
       <View style={styles.content}>
         <ScrollView style={styles.chatView}>
           {map(messages, (message, index) => (
-            <Message key={index} message={message} userName={userName} />
+            <Message key={index} message={message} name={userName} />
           ))}
         </ScrollView>
         <Input sendMessage={sendMessage} />
